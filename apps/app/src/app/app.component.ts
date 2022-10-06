@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Message } from '@angular-nest-codegen/api-interfaces';
+import { ApiService } from '../api/services';
 
 @Component({
   selector: 'angular-nest-codegen-root',
@@ -8,6 +8,6 @@ import { Message } from '@angular-nest-codegen/api-interfaces';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  hello$ = this.http.get<Message>('/api/hello');
-  constructor(private http: HttpClient) {}
+  hello$ = this.apiService.appControllerGetData();
+  constructor(private http: HttpClient, private apiService: ApiService) {}
 }

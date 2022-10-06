@@ -9,6 +9,7 @@ import { RequestBuilder } from '../request-builder';
 import { Observable } from 'rxjs';
 import { map, filter } from 'rxjs/operators';
 
+import { Message } from '../models/message';
 
 @Injectable({
   providedIn: 'root',
@@ -35,20 +36,20 @@ export class ApiService extends BaseService {
   appControllerGetData$Response(params?: {
     context?: HttpContext
   }
-): Observable<StrictHttpResponse<void>> {
+): Observable<StrictHttpResponse<Message>> {
 
     const rb = new RequestBuilder(this.rootUrl, ApiService.AppControllerGetDataPath, 'get');
     if (params) {
     }
 
     return this.http.request(rb.build({
-      responseType: 'text',
-      accept: '*/*',
+      responseType: 'json',
+      accept: 'application/json',
       context: params?.context
     })).pipe(
       filter((r: any) => r instanceof HttpResponse),
       map((r: HttpResponse<any>) => {
-        return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
+        return r as StrictHttpResponse<Message>;
       })
     );
   }
@@ -62,10 +63,10 @@ export class ApiService extends BaseService {
   appControllerGetData(params?: {
     context?: HttpContext
   }
-): Observable<void> {
+): Observable<Message> {
 
     return this.appControllerGetData$Response(params).pipe(
-      map((r: StrictHttpResponse<void>) => r.body as void)
+      map((r: StrictHttpResponse<Message>) => r.body as Message)
     );
   }
 
