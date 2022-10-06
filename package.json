@@ -7,7 +7,8 @@
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2020 browser module main",
     "start": "nx run-many --target=serve",
     "build": "nx build",
-    "test": "nx test"
+    "test": "nx test",
+    "codegen": "ng-openapi-gen"
   },
   "private": true,
   "dependencies": {
@@ -58,6 +59,7 @@
     "jest": "28.1.1",
     "jest-environment-jsdom": "28.1.1",
     "jest-preset-angular": "~12.2.2",
+    "ng-openapi-gen": "^0.23.0",
     "nx": "14.8.3",
     "prettier": "^2.6.2",
     "ts-jest": "28.0.5",

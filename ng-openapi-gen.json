@@ -1,0 +1,5 @@
+{
+  "$schema": "node_modules/ng-openapi-gen/ng-openapi-gen-schema.json",
+  "input": "http://localhost:3333/api-json",
+  "output": "apps/app/src/api"
+}
